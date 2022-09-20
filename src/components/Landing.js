@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { getCoin } from '../services/api';
+import Coin from './Coin';
 import Loading from './Loading';
 
 const Landing = () => {
@@ -25,7 +26,7 @@ const Landing = () => {
             {
                 conis.length 
                 ?
-                    <div></div>
+                    conis.map( coinsData => <Coin key={coinsData.id} data={coinsData}/> )
                 :
                     <Loading/>
             }
