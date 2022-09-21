@@ -2,6 +2,7 @@ import React , { useState , useEffect } from 'react';
 import { getCoin } from '../services/api';
 import Coin from './Coin';
 import Loading from './Loading';
+import styles from '../assets/styles/Landing.module.css';
 
 const Landing = () => {
 
@@ -30,12 +31,25 @@ const Landing = () => {
     const searchCoin = conis.filter(coin=> coin.name.toLowerCase().includes(search.toLowerCase()) ) ;
 
     return (
-        <div>
-            <input type="text" placeholder='search ...' value={search} onChange={searchHandler} />
+        <div className={styles.landing}>
+            
             {
                 conis.length 
                 ?
-                    searchCoin.map( coinsData => <Coin key={coinsData.id} data={coinsData}/> )
+                    <>
+                        <input type="text" placeholder='search ...' value={search} onChange={searchHandler} className={styles.input}/>
+
+                        <div className={styles.coinContainer}>
+                            <ul className={styles.coniData}>
+                                <li>Coin</li>
+                                <li>Symbol</li>
+                                <li>Price</li>
+                                <li>24h</li>
+                                <li>Mkt Cap</li>
+                            </ul>
+                            {searchCoin.map( coinsData => <Coin key={coinsData.id} data={coinsData}/> )}
+                        </div>
+                    </>
                 :
                     <Loading/>
             }
